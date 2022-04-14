@@ -181,7 +181,7 @@ func CheckDisallowed(prefix string, spec interface{}) error {
 }
 
 // Process populates the specified struct based on environment variables
-func Process(prefix string, spec interface{}) error {
+func Process(prefix string, spec interface{}, defaultTag string) error {
 	infos, err := gatherInfo(prefix, spec)
 
 	for _, info := range infos {
@@ -195,7 +195,7 @@ func Process(prefix string, spec interface{}) error {
 			value, ok = lookupEnv(info.Alt)
 		}
 
-		def := info.Tags.Get("default")
+		def := info.Tags.Get(defaultTag)
 		if def != "" && !ok {
 			value = def
 		}
