@@ -229,7 +229,7 @@ func Process(prefix string, spec interface{}, defaultTag string) error {
 
 // MustProcess is the same as Process but panics if an error occurs
 func MustProcess(prefix string, spec interface{}) {
-	if err := Process(prefix, spec); err != nil {
+	if err := Process(prefix, spec, "default"); err != nil {
 		panic(err)
 	}
 }

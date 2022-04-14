@@ -1,3 +1,4 @@
+//go:build go1.8
 // +build go1.8
 
 package envconfig
@@ -21,7 +22,7 @@ func TestParseURL(t *testing.T) {
 	os.Setenv("ENV_CONFIG_URLVALUE", "https://github.com/kelseyhightower/envconfig")
 	os.Setenv("ENV_CONFIG_URLPOINTER", "https://github.com/kelseyhightower/envconfig")
 
-	err := Process("env_config", &s)
+	err := Process("env_config", &s, "default")
 	if err != nil {
 		t.Fatal("unexpected error:", err)
 	}
@@ -46,7 +47,7 @@ func TestParseURLError(t *testing.T) {
 	os.Clearenv()
 	os.Setenv("ENV_CONFIG_URLPOINTER", "http_://foo")
 
-	err := Process("env_config", &s)
+	err := Process("env_config", &s, "default")
 
 	v, ok := err.(*ParseError)
 	if !ok {
