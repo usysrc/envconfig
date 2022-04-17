@@ -49,7 +49,7 @@ type Specification struct {
 
 func main() {
     var s Specification
-    err := envconfig.Process("myapp", &s)
+    err := envconfig.Process("myapp", &s, "default")
     if err != nil {
         log.Fatal(err.Error())
     }
